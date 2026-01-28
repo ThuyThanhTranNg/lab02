@@ -4,13 +4,24 @@
     <meta charset="UTF-8">
     <title>Danh sách sinh viên</title>
 
+    <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 <body class="bg-light">
 
 <div class="container mt-5">
 
-    <h2 class="text-center text-primary mb-4">DANH SÁCH SINH VIÊN</h2>
+    <h2 class="text-center text-primary mb-3">DANH SÁCH SINH VIÊN</h2>
+
+    <!-- NÚT THÊM -->
+    <div class="d-flex justify-content-end mb-3">
+        <a href="/students/add" class="btn btn-success">
+            <i class="bi bi-plus-circle"></i> Thêm sinh viên
+        </a>
+    </div>
 
     <!-- FORM TÌM KIẾM -->
     <form class="row g-3 mb-4" method="get" action="/students">
@@ -20,7 +31,9 @@
                    th:value="${keyword}">
         </div>
         <div class="col-md-4">
-            <button class="btn btn-primary w-100">🔍 Tìm kiếm</button>
+            <button class="btn btn-primary w-100">
+                <i class="bi bi-search"></i> Tìm kiếm
+            </button>
         </div>
     </form>
 
@@ -29,29 +42,47 @@
         <div class="card-body">
             <table class="table table-bordered table-hover text-center align-middle">
                 <thead class="table-dark">
-                    <tr>
-                        <th>ID</th>
-                        <th>Họ tên</th>
-                        <th>Tuổi</th>
-                        <th>Email</th>
-                        <th>Giới tính</th>
-                        <th>Chi tiết</th>
-                    </tr>
+                <tr>
+                    <th>ID</th>
+                    <th>Họ tên</th>
+                    <th>Tuổi</th>
+                    <th>Email</th>
+                    <th>Giới tính</th>
+                    <th>Hành động</th>
+                </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="sv : ${students}">
-                        <td th:text="${sv.id}"></td>
-                        <td th:text="${sv.name}"></td>
-                        <td th:text="${sv.age}"></td>
-                        <td th:text="${sv.email}"></td>
-                        <td th:text="${sv.gender}"></td>
-                        <td>
-                            <a class="btn btn-sm btn-info"
-                               th:href="@{'/students/' + ${sv.id}}">
-                                Xem
-                            </a>
-                        </td>
-                    </tr>
+                <tr th:each="sv : ${students}">
+                    <td th:text="${sv.id}"></td>
+                    <td th:text="${sv.name}"></td>
+                    <td th:text="${sv.age}"></td>
+                    <td th:text="${sv.email}"></td>
+                    <td th:text="${sv.gender}"></td>
+                    <td>
+                        <a class="btn btn-sm btn-info me-1"
+                           th:href="@{'/students/' + ${sv.id}}">
+                            <i class="bi bi-eye"></i>
+                        </a>
+
+                        <a class="btn btn-sm btn-warning me-1"
+                           th:href="@{'/students/edit/' + ${sv.id}}">
+                            <i class="bi bi-pencil-square"></i>
+                        </a>
+
+                        <a class="btn btn-sm btn-danger"
+                           th:href="@{'/students/delete/' + ${sv.id}}"
+                           onclick="return confirm('Bạn có chắc chắn muốn xóa sinh viên này không?');">
+                            <i class="bi bi-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+
+                <!-- Không có dữ liệu -->
+                <tr th:if="${#lists.isEmpty(students)}">
+                    <td colspan="6" class="text-muted py-4">
+                        Không có sinh viên nào
+                    </td>
+                </tr>
                 </tbody>
             </table>
         </div>

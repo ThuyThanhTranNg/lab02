@@ -18,7 +18,7 @@ public class Student {
     private int age;
     private String email;   
     private String gender;
-
+    private String className;
     public Student() {
     }
 
@@ -30,12 +30,13 @@ public class Student {
     }
 
 
-    public Student(int id, String name, int age, String email, String gender) {
+    public Student(int id, String name, int age, String email, String gender, String className) {
         this.id = id;
         this.name = name;
         this.age = age;
         this.email = email;
         this.gender = gender;
+        this.className = className;
     }
 
     public int getId() {
@@ -76,5 +77,12 @@ public class Student {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+    public String getClassName() {
+        return className;
+    }
+
+    public void setClassName(String className) {
+        this.className = className;
     }
 }
