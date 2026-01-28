@@ -24,7 +24,8 @@ public class StudentViewController {
             Model model) {
 
         if (keyword != null && !keyword.trim().isEmpty()) {
-            model.addAttribute("students", studentService.searchByName(keyword));
+            // ✅ SỬA DÒNG NÀY: tìm theo ID hoặc tên
+            model.addAttribute("students", studentService.searchByKeyword(keyword));
             model.addAttribute("keyword", keyword);
         } else {
             model.addAttribute("students", studentService.getAllStudents());
@@ -33,15 +34,12 @@ public class StudentViewController {
     }
 
     // ================== THÊM ==================
-
-    // Mở form thêm
     @GetMapping("/students/add")
     public String addStudentForm(Model model) {
         model.addAttribute("student", new Student());
         return "student-add";
     }
 
-    // Lưu sinh viên mới
     @PostMapping("/students/save")
     public String saveStudent(@ModelAttribute("student") Student student) {
         studentService.save(student);
@@ -63,15 +61,12 @@ public class StudentViewController {
     }
 
     // ================== SỬA ==================
-
-    // Mở form sửa
     @GetMapping("/students/edit/{id}")
     public String editStudentForm(@PathVariable int id, Model model) {
         model.addAttribute("student", studentService.getStudentById(id));
         return "student-edit";
     }
 
-    // Xử lý submit form sửa
     @PostMapping("/students/update")
     public String updateStudent(@ModelAttribute("student") Student student) {
         studentService.updateStudent(student);

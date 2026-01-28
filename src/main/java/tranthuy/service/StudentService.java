@@ -25,6 +25,16 @@ public class StudentService {
     public List<Student> searchByName(String keyword) {
         return repository.findByNameContainingIgnoreCase(keyword);
     }
+    public List<Student> searchByKeyword(String keyword) {
+    // nếu keyword là số → tìm theo ID
+    if (keyword.matches("\\d+")) {
+        Student student = repository.findById(Integer.parseInt(keyword)).orElse(null);
+        return student != null ? List.of(student) : List.of();
+    }
+    // ngược lại → tìm theo tên
+    return repository.findByNameContainingIgnoreCase(keyword);
+}
+
 
     // ✅ THÊM SINH VIÊN
     public void save(Student student) {
