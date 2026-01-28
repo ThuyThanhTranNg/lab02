@@ -5,8 +5,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
 
+import java.util.List;
 
 import tranthuy.modules.Student;
 import tranthuy.service.StudentService;
@@ -32,6 +32,22 @@ public class StudentViewController {
         return "students";
     }
 
+    // ================== THÊM ==================
+
+    // Mở form thêm
+    @GetMapping("/students/add")
+    public String addStudentForm(Model model) {
+        model.addAttribute("student", new Student());
+        return "student-add";
+    }
+
+    // Lưu sinh viên mới
+    @PostMapping("/students/save")
+    public String saveStudent(@ModelAttribute("student") Student student) {
+        studentService.save(student);
+        return "redirect:/students";
+    }
+
     // ================== CHI TIẾT ==================
     @GetMapping("/students/{id}")
     public String studentDetail(@PathVariable int id, Model model) {
@@ -55,17 +71,17 @@ public class StudentViewController {
         return "student-edit";
     }
 
-    //  XỬ LÝ SUBMIT FORM SỬA 
+    // Xử lý submit form sửa
     @PostMapping("/students/update")
     public String updateStudent(@ModelAttribute("student") Student student) {
         studentService.updateStudent(student);
         return "redirect:/students";
     }
-    // API: GET ALL STUDENTS AS JSON
+
+    // ================== API JSON ==================
     @GetMapping("/students/api")
     @ResponseBody
     public ResponseEntity<List<Student>> getAllStudentsApi() {
-        List<Student> students = studentService.getAllStudents();
-        return ResponseEntity.ok(students);
+        return ResponseEntity.ok(studentService.getAllStudents());
     }
 }

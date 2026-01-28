@@ -8,26 +8,39 @@
 <div class="container mt-5">
     <h2>Thêm sinh viên</h2>
 
-    <form th:action="@{/students/save}" th:object="${student}" method="post">
+    <form th:action="@{/students/save}"
+          th:object="${student}"
+          method="post">
+
+        <!-- ❌ XOÁ CSRF (vì KHÔNG dùng Spring Security) -->
 
         <div class="mb-3">
             <label>Họ tên</label>
-            <input type="text" class="form-control" th:field="*{name}" required>
+            <input type="text"
+                   class="form-control"
+                   th:field="*{name}"
+                   required>
         </div>
 
         <div class="mb-3">
             <label>Tuổi</label>
-            <input type="number" class="form-control" th:field="*{age}" required>
+            <input type="number"
+                   class="form-control"
+                   th:field="*{age}"
+                   required>
         </div>
 
         <div class="mb-3">
             <label>Email</label>
-            <input type="email" class="form-control" th:field="*{email}">
+            <input type="email"
+                   class="form-control"
+                   th:field="*{email}">
         </div>
 
         <div class="mb-3">
             <label>Giới tính</label>
-            <select class="form-control" th:field="*{gender}">
+            <select class="form-select" th:field="*{gender}">
+                <option value="">-- Chọn --</option>
                 <option value="Nam">Nam</option>
                 <option value="Nữ">Nữ</option>
             </select>
@@ -35,7 +48,9 @@
 
         <div class="mb-3">
             <label>Lớp</label>
-            <input type="text" class="form-control" th:field="*{className}">
+            <input type="text"
+                   class="form-control"
+                   th:field="*{className}">
         </div>
 
         <button type="submit" class="btn btn-success">Lưu</button>

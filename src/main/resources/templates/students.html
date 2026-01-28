@@ -48,6 +48,7 @@
                     <th>Tuổi</th>
                     <th>Email</th>
                     <th>Giới tính</th>
+                    <th>Lớp</th> <!-- ✅ THÊM -->
                     <th>Hành động</th>
                 </tr>
                 </thead>
@@ -58,6 +59,7 @@
                     <td th:text="${sv.age}"></td>
                     <td th:text="${sv.email}"></td>
                     <td th:text="${sv.gender}"></td>
+                    <td th:text="${sv.className}"></td> <!-- ✅ THÊM -->
                     <td>
                         <a class="btn btn-sm btn-info me-1"
                            th:href="@{'/students/' + ${sv.id}}">
@@ -79,7 +81,7 @@
 
                 <!-- Không có dữ liệu -->
                 <tr th:if="${#lists.isEmpty(students)}">
-                    <td colspan="6" class="text-muted py-4">
+                    <td colspan="7" class="text-muted py-4">
                         Không có sinh viên nào
                     </td>
                 </tr>

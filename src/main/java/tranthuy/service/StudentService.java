@@ -27,8 +27,8 @@ public class StudentService {
     }
 
     // ✅ THÊM SINH VIÊN
-    public Student addStudent(Student student) {
-        return repository.save(student);
+    public void save(Student student) {
+        repository.save(student);
     }
 
     // ✅ UPDATE
