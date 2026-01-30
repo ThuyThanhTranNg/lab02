@@ -79,4 +79,11 @@ public class StudentViewController {
     public ResponseEntity<List<Student>> getAllStudentsApi() {
         return ResponseEntity.ok(studentService.getAllStudents());
     }
+    // ================== API CREATE ==================
+    @PostMapping("/students/api")
+    @ResponseBody
+    public ResponseEntity<Student> createStudentApi(@RequestBody Student student) {
+        studentService.save(student);
+        return ResponseEntity.ok(student);
+    }
 }
